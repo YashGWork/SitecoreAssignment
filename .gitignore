@@ -1,0 +1,33 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.suo
+*.user
+*.vs/
+
+# NuGet Packages
+packages/
+
+# Configuration files
+appsettings.Development.json
+appsettings.*.json
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+
+# Visual Studio files
+.vs/
+*.vscode/
+*.sln.ide/
+
+# Publish output
+publish/
+wwwroot/lib/
+
+# Other IDE specific files
+.idea/
+*.db

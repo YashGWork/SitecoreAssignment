@@ -1,0 +1,84 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+
+
+@{
+    ViewBag.Title = "ServiceArea";
+
+    // Get the current rendering item
+    var renderingItem = RenderingContext.Current.Rendering.Item;
+
+    // Cast the page to a Sitecore item
+    Item myItem = (Item)renderingItem;
+
+    // Reading the Multilist
+    MultilistField cardListItem = myItem.Fields["sectionCard"];
+
+    // Getting all the items
+    Item[] cards = cardListItem.GetItems();
+}
+
+<div class="service__area-one section-bg pt-250 pb-90">
+    <div class="container">
+        <div class="row wow fadeInUp" data-wow-delay=".3s">
+            <div class="col-lg-8 col-md-8">
+                <div class="section__title-one s-2 mb-50">
+
+                    <span>@Html.Sitecore().Field("infoTitle")</span>
+
+                    <h2> @Html.Sitecore().Field("infoContent") </h2>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="service__btn mt-10 text-md-end d-none d-md-block">
+                    <a class="it__btn-4" href="https://eurtech-react.vercel.app/service-details">
+                        <span>@Html.Sitecore().Field("ctaText")</span>
+                        <i class="bdevs-btn-icon fas fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row wow fadeInUp" data-wow-delay=".3s">
+
+
+            @foreach (Item card in cards)
+            {
+
+                var dataTarget = card.Fields["infoTitle"];
+                var dataInfo = card.Fields["infoContent"];
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="service__item-one mb-30">
+                        <div class="service__item-wrapper">
+                            <div class="service__item-thumb">
+
+                                @Html.Sitecore().Field("cardLogo", card)
+                            </div>
+                            <div class="service__item-content">
+                                <h3>
+
+                                    <a href="@card.Fields["cardTitleLink"]">@Html.Sitecore().Field("cardAnchorTitle", card)</a>
+
+                                </h3>
+                                <p>
+                                    @Html.Sitecore().Field("cardTitle", card)
+                                </p>
+                            </div>
+                            <div class="service__item-btn">
+                                <a class="service__btn" href="@card.Fields["cardAnchor"]"><span>@Html.Sitecore().Field("text", card)</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+
+
+        </div>
+    </div>
+</div>
+

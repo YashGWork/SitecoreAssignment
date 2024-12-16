@@ -1,0 +1,102 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+@using Sitecore.Collections
+
+@{
+    ViewBag.Title = "HeaderMain";
+
+    // Cast the page to a Sitecore item
+    Item myItem = (Item)Model;
+
+    // Reading the Multilist of Menu headings
+    MultilistField menuListItem = myItem.Fields["menuItems"];
+
+    // Getting all the items
+    Item[] menuOptions = menuListItem.GetItems();
+
+}
+
+
+<div class="header__area header__transparent">
+    <div class="container">
+        <div class="header__main-wrapper d-none d-lg-block">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-2 col-lg-2 col-6">
+                    <div class="header__toggle">
+                        <button class="sidebar__toggle" onclick="displaymenu()">
+                            <img src="~/assets/img/bento-menu.svg" alt="bento mentu">
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-8 d-none d-lg-block">
+                    <div class="menu__main-wrapper d-flex justify-content-center">
+                        <div class="main-menu d-none d-none d-lg-block">
+                            <nav id="mobile-menu-2">
+                                <ul>
+
+
+
+                                    @foreach (Item menu in menuOptions)
+                                    {
+                                        <li class="active has-dropdown">
+
+                                            @Html.Sitecore().Field("ctaLink", menu)
+
+                                            @{
+
+                                                ChildList children = menu.GetChildren();
+
+                                                if (children.Count > 0 && children != null)
+                                                {
+
+                                                    <ul class="submenu">
+
+                                                        @foreach (Item child in children)
+                                                        {
+
+                                                            if (child != null)
+                                                            {
+                                                                <li>@Html.Sitecore().Field("ctaLink", child)</li>
+                                                            }
+
+                                                        }
+
+                                                    </ul>
+                                                }
+                                            }
+
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-6">
+                    <div class="header__right text-end">
+                        <div class="search__button">
+                            <span class="search__toggle">
+                                <i class="header-search__btn fa-regular fa-magnifying-glass"></i><i class="header-search__close fa-regular fa-xmark"></i>
+                            </span>
+                            <div class="bd-search__form p-relative">
+                                <form action="#">
+                                    <input type="text"
+                                           placeholder="Search here..." /><button type="submit">
+                                        <i class="fa-regular fa-magnifying-glass"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

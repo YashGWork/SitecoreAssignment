@@ -1,0 +1,143 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+@using Sitecore.Collections
+
+@{
+    ViewBag.Title = "HeaderWidget";
+
+    // Cast the page to a Sitecore item
+    Item myItem = (Item)Model;
+
+    // Reading the Multilist
+    MultilistField contentListItem = myItem.Fields["contactInfo"];
+
+    // Getting all the items
+    Item[] contentItems = contentListItem.GetItems();
+
+    // Reading the Multilist of Menu headings
+    MultilistField menuListItem = myItem.Fields["menuItems"];
+
+    // Getting all the items
+    Item[] menuOptions = menuListItem.GetItems();
+}
+
+
+<div id="header-sticky" class="header__widget-area">
+    <div class="container">
+        <div class="header__widget-main">
+            <div class="row align-items-center">
+                <div class="col-xl-3 col-lg-3 col-6">
+                    <div class="header__logo">
+                        <a href="https://eurtech-react.vercel.app/">
+                            @*<img src="assets/img/Logo.png" alt="logo" />*@
+                            @Html.Sitecore().Field("companyLogo", myItem)
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-6">
+                    <div class="header__widget-wrapper">
+
+
+                        @foreach (var contentItem in contentItems)
+                        {
+                            <div class="header__widget-info">
+                                <div class="header__widget-icon">
+
+                                    @Html.Sitecore().Field("iconLogo", contentItem)
+                                </div>
+                                <div class="header__widget-content">
+
+                                    <span>@Html.Sitecore().Field("infoTitle", contentItem)</span>
+                                    <h4>
+
+                                        <a href="mailto:info@webmail.com" class="contactinfo">@Html.Sitecore().Field("infoContent", contentItem)</a>
+                                    </h4>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="header__right">
+                            <div class="header__button d-none d-lg-block">
+                                <a class="header__btn-1" href="https://eurtech-react.vercel.app/contact">
+
+                                    @Html.Sitecore().Field("ctaText", myItem)
+                                    <span><i class="fa-solid fa-angle-right"></i></span>
+                                </a>
+                            </div>
+                            <div class="header__widget-toggle d-lg-none">
+                                <span class="sidebar__toggle">
+                                    <div class="bar-icon" onclick="displaymenu()">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hidden__header">
+                        <div class="hidden__header-inner">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav id="mobile-menu">
+                                    <ul>
+
+                                        @foreach (Item menu in menuOptions)
+                                        {
+                                            <li class="active has-dropdown">
+
+                                                @Html.Sitecore().Field("ctaLink", menu)
+
+                                                @{
+
+                                                    ChildList children = menu.GetChildren();
+
+                                                    if (children.Count > 0 && children != null)
+                                                    {
+
+                                                        <ul class="submenu">
+
+                                                            @foreach (Item child in children)
+                                                            {
+
+                                                                if (child != null)
+                                                                {
+                                                                    <li>@Html.Sitecore().Field("ctaLink", child)</li>
+                                                                }
+
+                                                            }
+
+                                                        </ul>
+                                                    }
+                                                }
+
+                                            </li>
+                                        }
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="header__button d-none d-xl-block">
+                                <a class="header__btn-1" href="https://eurtech-react.vercel.app/contact">
+                                    @Html.Sitecore().Field("ctaText", myItem)
+                                    <span><i class="fa-solid fa-angle-right"></i></span>
+                                </a>
+                            </div>
+                            <div class="header__toggle d-lg-none">
+                                <span class="sidebar__toggle">
+                                    <div class="bar-icon">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

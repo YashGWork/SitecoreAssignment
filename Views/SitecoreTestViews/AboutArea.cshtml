@@ -1,0 +1,97 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Web;
+@using System.Web.Mvc;
+@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+
+@{
+    ViewBag.Title = "AboutArea";
+
+    // Get the current rendering item
+    var renderingItem = RenderingContext.Current.Rendering.Item;
+
+    // Cast the page to a Sitecore item
+
+    Item myItem = (Item)renderingItem;
+
+    //var dataTarget = @Html.Sitecore().Field("yearsOfExperience", myItem);
+
+    // To get the field value to pass through the dataset
+
+    Field dataTarget = myItem.Fields["yearsOfExperience"];
+
+
+}
+
+
+<section class="about__area pt-120 pb-60">
+    <div class="container">
+        <div class="row align-items-center wow fadeInUp" data-wow-delay=".3s">
+            <div class="col-xl-6 col-lg-6">
+                <div class="about__left-one p-relative mb-60">
+                    <div class="about__left-thumb">
+                        @*<img src="~/assets/img/about-01.jpg" alt="about-img" />*@
+                        @Html.Sitecore().Field("aboutImage",myItem)
+                    </div>
+                    <div class="about__experience-shape">
+                        <div class="about__experience-content">
+                            <h2 class="counter">
+                                <div class="d-inline-flex">
+                                    <div class="counter-count" data-target="@dataTarget">0</div>
+                                    <span><span></span></span>
+                                </div>
+                            </h2>
+                            <span>@Html.Sitecore().Field("infoContent", myItem)</span>
+                            <div class="about__experience-shape-icon">
+                                <i class="fal fa-trophy-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+                <div class="about__right-content mb-60">
+                    <div class="section__title-one mb-35">
+                        @*<span>// About Us</span>*@
+                        <span>@Html.Sitecore().Field("sectionIntro", myItem)</span>
+                        @*<h2>Best in classy product near from you.</h2>*@
+                    <h2>@Html.Sitecore().Field("aboutUsTitle", myItem)</h2>
+                    </div>
+                    <div class="about__description-text">
+                        @*<p>
+                            From finance, retail, and travel, to social media,
+                            cybersecurity, adtech, and more, market leaders are
+                            leveraging web data to maintain their advantage. Discover
+                            how it can work for you.
+                        </p>*@
+                        <p>
+                            @Html.Sitecore().Field("sectionInfo", myItem)
+                        </p>
+                    </div>
+                    <div class="about__quote-content mb-40">
+                        @*<h3>
+                            Highest quality data, #01 network uptime, fastest output.
+                            Unlimited scale and customizing possibilities.
+                        </h3>*@
+                        <h3>
+                            @Html.Sitecore().Field("aboutAuthorQuote", myItem)
+                        </h3>
+                        <div class="about__quote-author">
+                            <h4>@Html.Sitecore().Field("aboutAuthor", myItem), <span>@Html.Sitecore().Field("aboutAuthorDesignation", myItem)</span></h4>
+                        </div>
+                    </div>
+                    <div class="about__btn">
+                        <a class="it__btn-3" href="https://eurtech-react.vercel.app/about">
+                            @Html.Sitecore().Field("ctaText", myItem) <span><i class="fa-solid fa-angle-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

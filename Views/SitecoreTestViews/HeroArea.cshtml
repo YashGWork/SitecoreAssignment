@@ -1,0 +1,108 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+@using Sitecore.Resources.Media
+@using Sitecore.Links
+@using Sitecore.Xml.Xsl
+@using Sitecore.Shell.Applications.ContentEditor;
+
+
+@{
+    ViewBag.Title = "HeroArea";
+
+    // Get the current rendering item
+    var renderingItem = RenderingContext.Current.Rendering.Item;
+
+    // Cast the page to a Sitecore item
+
+    Item myItem = (Item)renderingItem;
+
+    var backgroundImage = Html.Sitecore().Field("backgroundImage");
+
+    Field example = myItem.Fields["backgroundImage"];
+
+    string examplefield = example.ToString();
+
+    string example2 = example.ToString();
+
+    ImageField imageField = myItem.Fields["backgroundImage"];
+
+    string imageUrl = string.Empty;
+    string imageLinkUrl = null;
+    if (imageField != null && imageField.MediaItem != null)
+    {
+        imageUrl = Sitecore.Resources.Media.MediaManager.GetMediaUrl(imageField.MediaItem);
+    }
+
+}
+
+
+<div class="hero__area">
+
+    <div class="hero__item hero__height hero__bg d-flex align-items-center p-relative"
+         style="        background: url('@imageUrl');
+        background-size: cover;
+        background-position: 15%;
+        background-repeat: no-repeat;
+">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10">
+                    <div class="hero__content">
+
+                        <span>@Html.Sitecore().Field("sectionIntro", myItem)</span>
+
+                        <h2>@Html.Sitecore().Field("sectionTitle", myItem)</h2>
+
+                        <p>
+                            @Html.Sitecore().Field("sectionIntfo", myItem)
+                        </p>
+                        <div class="hero__btn-wrapper">
+                            <div class="modal-video displaynone" tabindex="-1" role="dialog" aria-label="You just opened the modal video">
+                                <div class="modal-video-body">
+                                    <div class="modal-video-inner" style="width: 100%;">
+                                        <div class="modal-video-movie-wrap" style="padding-bottom: 56.25%;">
+                                            <button class="modal-video-close-btn" onclick="hidevideo()"
+                                                    aria-label="Close the modal by clicking here">
+                                            </button>
+                                            <iframe width="460" height="230"
+                                                    src="//www.youtube.com/embed/vWLcyFtni6U?autoplay=1&amp;cc_load_policy=1&amp;controls=1&amp;disablekb=0&amp;enablejsapi=0&amp;fs=1&amp;iv_load_policy=1&amp;loop=0&amp;rel=0&amp;showinfo=1&amp;start=0&amp;wmode=transparent&amp;theme=dark&amp;mute=0"
+                                                    frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen="" tabindex="-1"></iframe>
+                                            <!--  Sitecore Changes -> Removed autoplay;  -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="it__btn-2" href="https://eurtech-react.vercel.app/about">
+
+                                @Html.Sitecore().Field("ctaText", myItem)
+                                <span>
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
+                            <div class="hero__btn-link">
+                                <ul>
+                                    <li>
+                                        <span class="hero__video-btn popup-video" onclick="showvideo()">
+                                            ▶
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="hero__video-intro popup-video"
+                                              onclick="showvideo()">
+
+                                            @Html.Sitecore().Field("text", myItem)
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

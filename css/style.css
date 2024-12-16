@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bg-container {
+  background: linear-gradient(#efefef, #fff);
+  box-shadow: inset 0 7px 12px -5px rgba(0, 0, 0, 0.4);
+  padding: 2rem 4rem;
+  min-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.main-heading{
+  font-family: "Source Serif 4", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+}
+
+.solve-box-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.solve-box {
+  margin: 0.5rem;
+  padding-top: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: auto;
+}
+
+.solutions_start {
+  flex-direction: row;
+}
+
+.solutions_end {
+  flex-direction: row-reverse;
+}
+
+.icon-container {
+  width: 15%;
+  max-width: 200px;
+}
+
+.text-container {
+  width: 32%;
+  display: flex;
+}
+
+.left-text,
+.right-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.headingcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.numberings {
+  width: 23px;
+  height: 36px;
+}
+
+.solve-box-heading {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size: 24px;
+  font-style: normal;
+  color: rgb(54, 54, 54);
+  margin-bottom: 2rem;
+}
+
+.desc ul {
+  list-style-type: none;
+}
+
+.desc li,
+.desc p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  color: rgb(54, 54, 54);
+  line-height: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+.desc li {
+  list-style-image: url("../media/BulletIcon.png");
+}
+
+.solve-box-img {
+  height: 150px;
+  width: 150px;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 1130px) {
+    .solve-box-img{
+        height: 150px;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 1130px) {
+  .solve-box-img {
+    height: 130px;
+    width: 130px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .solve-box-img {
+    height: 110px;
+    width: 110px;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .solve-box-img {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bg-container {
+    padding: 2rem 1rem;
+  }
+
+  .solutions_end,
+  .solutions_start {
+    flex-direction: column;
+  }
+
+  .headingcontainer {
+    flex-direction: row;
+  }
+
+  .text-container,
+  .icon-container {
+    width: 90%;
+  }
+
+  .solve-box-img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .solve-box {
+    width: 100%;
+  }
+
+  .text-container {
+    justify-content: center;
+    margin: 0 1rem;
+  }
+}

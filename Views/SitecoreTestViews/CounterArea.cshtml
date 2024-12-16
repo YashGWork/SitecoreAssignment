@@ -1,0 +1,62 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+
+@{
+    ViewBag.Title = "CounterArea";
+
+    // Get the current rendering item
+    var renderingItem = RenderingContext.Current.Rendering.Item;
+
+    // Cast the page to a Sitecore item
+    Item myItem = (Item)renderingItem;
+
+   // Reading the Multilist
+   MultilistField cardListItem = myItem.Fields["stats"];
+
+    // Getting all the items
+    Item[] cards = cardListItem.GetItems();
+
+}
+
+<section class="counter__area z-index-11 include__bg">
+    <div class="container">
+        <div class="counter__bg-area include__bg pt-65 pb-35"
+             style="background: url('@Url.Content("~/assets/img/counter-bg.jpg")')">
+            <div class="row">
+
+                @foreach (Item card in cards)
+                {
+
+                    //Field dataTarget = card.Fields["infoTitle"];
+                    //Field targetInfo = card.Fields["infoContent"];
+
+                    var dataTarget = card.Fields["infoTitle"];
+                    //var dataInfo = card.Fields["infoContent"];
+
+
+                        <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+                        <div class="counter__item text-center">
+                            <div class="counter__item-number">
+                                <h2 class="counter">
+                                    <div class="d-inline-flex">
+                                        @*<div class="counter-count" data-target="@dataTarget">0</div>*@
+                                        <div class="counter-count" data-target="@dataTarget">0</div>
+                                        <span><span></span></span>
+                                    </div>
+                                </h2>
+                                @*<p>Masterclass Team <br />ever made</p>*@
+                                @*<p>@targetInfo</p>*@
+                                <p class="card_para"> @Html.Sitecore().Field("infoContent",card) </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>

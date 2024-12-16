@@ -1,0 +1,56 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Web;
+@using System.Web.Mvc;
+@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Default || Eurtech - IT Solutions React Next js Template</title>
+    <link rel="icon" href="~/assets/img/favicon.png" type="image/icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Poppins:wght@100..900&family=Rubik:wght@300..900&family=Source+Serif+4:wght@200..900&display=swap" rel="stylesheet">
+    <script src="~/scripts/script.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        @Html.Sitecore().Placeholder("header")
+    </header>
+
+
+    <!-- Main -->
+
+    <main>
+
+        @Html.Sitecore().Placeholder("main")
+
+        <!-- Hero Area -->
+        <!-- About Area -->
+        <!-- Counter Area -->
+        <!-- Service Area -->
+
+
+    </main>
+
+    <!-- Footer -->
+
+    @Html.Sitecore().Placeholder("footer")
+
+
+</body>
+</html>

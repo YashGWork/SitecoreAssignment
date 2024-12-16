@@ -1,0 +1,189 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Mvc.Helpers
+@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+
+@{
+    ViewBag.Title = "Footer";
+
+    // Cast the page to a Sitecore item
+    Item myItem = (Item)Model;
+
+    // Reading the first Multilist of Menu headings
+    MultilistField firstMenuListItem = myItem.Fields["firstMenuList"];
+
+    // Getting all the items
+    Item[] firstMenuOptions = firstMenuListItem.GetItems();
+
+    // Reading the second Multilist of Menu headings
+    MultilistField secondMenuListItem = myItem.Fields["secondMenuList"];
+
+    // Getting all the items
+    Item[] secondMenuOptions = secondMenuListItem.GetItems();
+
+    // Reading the Emergency Service Multilist of Menu headings
+    MultilistField emergencyServicesMenuListItem = myItem.Fields["emergencyServicesList"];
+
+    // Getting all the items
+    Item[] emergencyServices = emergencyServicesMenuListItem.GetItems();
+
+    // Reading the MenuItems Multilist of Menu headings
+    MultilistField MenuListItem = myItem.Fields["menuFields"];
+
+    // Getting all the items
+    Item[] MenuOptions = MenuListItem.GetItems();
+
+}
+
+<footer>
+    <section class="footer__area footer-bg pt-200"
+             style="background-image: url('')">
+        <div class="">
+            <div class="container">
+                <div class="footer-main__wrapper pb-40">
+                    <div class="row">
+                        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer__widget footer-col-1 mb-60">
+                                <div class="footer__title">
+                                    <h4 @Html.Sitecore().Field("infoTitle", myItem)
+                                </h4>
+                                </div>
+                                <div class="footer__content">
+                                    <p>
+                                        @Html.Sitecore().Field("infoContent", myItem)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer__widget footer-col-2 mb-60">
+                                <div class="footer__title">
+
+                                    <h4>
+                                        @Html.Sitecore().Field("firstMenuTitle", myItem)
+                                    </h4>
+                                </div>
+                                <div class="footer__link">
+                                    <ul>
+
+                                        @foreach (Item menu in firstMenuOptions)
+                                        {
+                                            <li> @Html.Sitecore().Field("ctaLink", menu) </li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer__widget footer-col-3 mb-60">
+                                <div class="footer__title">
+                                    <h4>
+                                        @*Our Services*@
+                                        @Html.Sitecore().Field("secondMenuTitle", myItem)
+                                    </h4>
+                                </div>
+                                <div class="footer__link-2">
+                                    <ul>
+
+
+                                        @foreach (Item menu in secondMenuOptions)
+                                        {
+                                            <li> @Html.Sitecore().Field("ctaLink", menu) </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-xxl-3 col-xl-3 offset-xxl-1 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer__widget footer-col-4 mb-60">
+                                <div class="footer__title">
+                                    <h4>
+                                        @*Our Availability*@
+                                        @Html.Sitecore().Field("sectionTitle", myItem)
+                                    </h4>
+                                </div>
+                                <div class="footer__contact">
+
+                                    @foreach (Item menu in emergencyServices)
+                                    {
+                                        <div class="footer__contact-item">
+                                            <span>@Html.Sitecore().Field("infoTitle", menu)</span>
+                                            <p class="mb-20">@Html.Sitecore().Field("infoContent", menu)</p>
+                                        </div>
+                                    }
+
+
+                                    <div class="footer__support">
+                                        <div class="footer__support-inner">
+                                            <div class="footer__support-icon">
+
+
+                                                @Html.Sitecore().Field("emergencyServiceLogo", myItem)
+                                            </div>
+                                            <div class="footer__support-title">
+
+                                                <span>
+
+
+                                                    @Html.Sitecore().Field("contactInfoTitle", myItem)
+                                                </span>
+                                                <a href="tel:00011122233">
+
+                                                    @Html.Sitecore().Field("contactInfo", myItem)
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer__info-area">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="footer__logo">
+                                        <a href="https://eurtech-react.vercel.app/">
+
+
+                                            @Html.Sitecore().Field("companyLogoWhite", myItem)
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="footer__link-3 text-sm-end">
+                                        <ul>
+
+                                            @foreach (Item menu in MenuOptions)
+                                            {
+                                                <li> @Html.Sitecore().Field("ctaLink", menu) </li>
+                                            }
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__copyright">
+                <div class="container">
+                    <div class="copyright__text">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+<div class="Toastify"></div>
+
